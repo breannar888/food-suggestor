@@ -14,13 +14,10 @@ import axios from 'axios'
 
 const url = "https://www.themealdb.com/api/json/v1/1/";
 
-const getData = (resource, filterFlag, input) => {
-    console.log(resource + " " + filterFlag + " " + input);
+export const getListedData = (resource) => {
+    console.log(resource);
 
-    //based on filterFlag, make api call to fetch list or filtered data
-    let flag = filterFlag ? "filter" : "list";
-
-    return axios.get(`${url}/${flag}.php?${resource}=${input}`)
+    return axios.get(`${url}/list.php?${resource}`)
     .then((res) => {
         console.log(res.data)
         return res;
@@ -28,4 +25,13 @@ const getData = (resource, filterFlag, input) => {
     .catch((err) => console.log("Error fetching data from resource - " + resource + " " + err.data));
 }
 
-export default getData;
+export const getFilteredData = (resource) => {
+    console.log(resource);
+
+    return axios.get(`${url}/filter.php?${resource}`)
+    .then((res) => {
+        console.log(res.data)
+        return res;
+    })
+    .catch((err) => console.log("Error fetching data from resource - " + resource + " " + err.data));
+}
