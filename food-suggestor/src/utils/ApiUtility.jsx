@@ -17,7 +17,7 @@ const url = "https://www.themealdb.com/api/json/v1/1/";
 export const getListedData = (resource) => {
     console.log(resource);
 
-    return axios.get(`${url}/list.php?${resource}`)
+    return axios.get(`${url}/list.php?${resource}=list`)
     .then((res) => {
         console.log(res.data)
         return res;
@@ -28,7 +28,7 @@ export const getListedData = (resource) => {
 export const getFilteredData = (resource) => {
     console.log(resource);
 
-    return axios.get(`${url}/filter.php?${resource}`)
+    return axios.get(`${url}/filter.php?${resource}=input`)
     .then((res) => {
         console.log(res.data)
         return res;
