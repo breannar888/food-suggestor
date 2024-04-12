@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { getListedData } from "../utils/ApiUtility";
+import { getListedData, getRandomData } from "../utils/ApiUtility";
 import StyledDropdown from "./styled/StyledDropdown";
 import MealCard from "./MealCard";
 import Box from "@mui/material/Box";
+import StyledButton from "./styled/StyledButton";
 
 export default function HomePage() {
   //replace multiple states with useReducer
@@ -29,13 +30,23 @@ export default function HomePage() {
     });
   }, []);
 
+  const handleSubmit = () => {
+    getRandomData().then((res) => {
+      setMeals(res.data);
+    });
+  };
+
+  const clearData = () => {
+    setMeals(null);
+  };
+
   return (
     <div>
       <div>
         {loading ? (
           <div>loading...</div>
         ) : (
-          <>
+          <Box sx={{ borderBottom: "1px solid #e1e8e2" }}>
             <StyledDropdown
               mealList={category.meals}
               resource="c"
@@ -54,10 +65,23 @@ export default function HomePage() {
               label="Ingredient"
               setMeals={setMeals}
             />
-          </>
+            <Box
+              sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "space-around",
+                m: "auto",
+                p: 2,
+                maxWidth: "50%",
+              }}
+            >
+              <StyledButton text={"Random"} onClickMethod={handleSubmit} />
+              <StyledButton text={"Clear"} onClickMethod={clearData} />
+            </Box>
+          </Box>
         )}
       </div>
-      <Box>
+      <Box sx={{ marginTop: 5 }}>
         {meals == null ? (
           <div>No meals yet!</div>
         ) : (
@@ -66,7 +90,7 @@ export default function HomePage() {
               display: "flex",
               flexWrap: "wrap",
               flexDirection: "row",
-              justifyContent: "center"
+              justifyContent: "center",
             }}
           >
             {meals.meals.map((meal, id) => {
