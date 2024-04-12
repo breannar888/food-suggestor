@@ -17,21 +17,6 @@ export default function MealCard({ meal }) {
             {meal.strMeal}
           </Typography>
         </CardContent>
-        <Button
-          sx={{
-            m: 1,
-            bgcolor: "#a2cf6e",
-            fontWeight: "bold",
-            "&:hover": {
-              backgroundColor: "#618833",
-              color: "#fff",
-            },
-          }}
-          aria-label="previous"
-          variant="contained"
-        >
-          View Meal
-        </Button>
       </Box>
       <CardMedia
         component="img"
